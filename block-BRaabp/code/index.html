@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet"
+  />
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+ <script type="text/babel">
+ let fonts = [
+        { name: 'Roboto', font: "'Roboto', sans-serif" },
+        { name: 'Open Sans', font: "'Open Sans', sans-serif" },
+        { name: 'Nato Sans', font: "'Noto Sans JP', sans-serif" },
+        { name: 'Montserrat', font: "'Montserrat', sans-serif" },
+      ];
+
+    class App extends React.Component{
+        constructor(props){
+            super(props)
+            this.state = {
+                inputText:"",
+                size:""
+            }
+
+
+        }
+
+        handlechange = (event) => {
+            this.setState({
+                inputText:event.target.value
+            })
+        }
+
+        handleSlider = (event) => {
+            this.setState({
+                size:event.target.value
+            })
+        }
+
+        render(){
+            return(
+            <>
+            <input type = "text" onChange = {this.handlechange} />
+            <input type="range" min="1" max="100" onChange = {this.handleSlider} value="50" class="slider" id="myRange"/>
+            <ul className = "cards-div" >
+                {fonts.map((font,i) => {
+                    return (<li key = {i} className = "card">
+                        <h3>{font.name}</h3>
+                        <h2 style = {{
+                            fontSize:this.state.size,
+                            fontFamily:font.font,
+                        }}>
+                        {this.state.inputText}
+                        </h2>
+                        </li>
+                    )
+                })}
+                </ul>
+            </>
+
+
+            )
+
+            ReactDOM.render(<App/>,document.getElementById('root'));
+        }
+        
+    }
+</script>    
+</body>
+</html>
