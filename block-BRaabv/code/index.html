@@ -10,27 +10,76 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script type = "text/babel">
-    let root = document.querySelector('#root');
+    <div id ="root"></div>
+            <script type="text/babel">
 
-    class App extends React.Component{
-        constructor(props){
-            super(props)
-            this.state = {
 
-            }
-        }
-        render(){
-            return(
-                <>
-                
-                </>
-            )
-        }
+class MainForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentStep: 1, 
+      email: '',
+      username: '',
+      password: '', 
     }
 
-    ReactDOM.render(<App/>,root)
+    // Bind the submission to handleChange() 
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  // Use the submitted data to set the state
+  handleChange(event) {
+    const {name, value} = event.target
+    this.setState({
+      [name]: value
+    }) 
+  }
+
+  // Trigger an alert on form submission
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const { email, username, password } = this.state
+    alert(`Your registration detail: \n 
+    Email: ${email} \n 
+    Username: ${username} \n
+    Password: ${password}`)
+  }
+
+  render(){
+      return(
+          <>
+          </>
+      )
+  }
+}
+
+
+
+
+           class Step1 extends React.Component {
+            render() {
+            if (this.props.currentStep !== 1) { 
+            return null
+        }
+
+         return(
+    <div className="form-group">
+      <label htmlFor="email">Email address</label>
+      <input 
+        className="form-control"
+        id="email"
+        name="email"
+        type="text"
+        placeholder="Enter email"
+        value={this.props.email} // Prop: The email input data
+        onChange={this.props.handleChange} // Prop: Puts data into state
+      />
+    </div>
+  )}
+}
+
+            ReactDOM.render(<App/>,document.getElementById('root'))
     </script>
 </body>
 </html>
