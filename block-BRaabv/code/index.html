@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id ="root"></div>
+            <script type="text/babel">
+
+
+class MainForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentStep: 1, 
+      email: '',
+      username: '',
+      password: '', 
+    }
+
+    // Bind the submission to handleChange() 
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  // Use the submitted data to set the state
+  handleChange(event) {
+    const {name, value} = event.target
+    this.setState({
+      [name]: value
+    }) 
+  }
+
+  // Trigger an alert on form submission
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const { email, username, password } = this.state
+    alert(`Your registration detail: \n 
+    Email: ${email} \n 
+    Username: ${username} \n
+    Password: ${password}`)
+  }
+
+  render(){
+      return(
+          <>
+          </>
+      )
+  }
+}
+
+
+
+
+           class Step1 extends React.Component {
+            render() {
+            if (this.props.currentStep !== 1) { 
+            return null
+        }
+
+         return(
+    <div className="form-group">
+      <label htmlFor="email">Email address</label>
+      <input 
+        className="form-control"
+        id="email"
+        name="email"
+        type="text"
+        placeholder="Enter email"
+        value={this.props.email} // Prop: The email input data
+        onChange={this.props.handleChange} // Prop: Puts data into state
+      />
+    </div>
+  )}
+}
+
+            ReactDOM.render(<App/>,document.getElementById('root'))
+    </script>
+</body>
+</html>
